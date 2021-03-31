@@ -19,9 +19,15 @@ public class FlapBehavior : MonoBehaviour
     {
         if(Input.GetButtonDown("Flap"))
             _rigidbody.AddForce(new Vector3(0, FlapForce, 0), ForceMode.Impulse);
+
         if (_rigidbody.velocity.y < -MaxFallSpeed)
             _rigidbody.velocity = new Vector3(0, -MaxFallSpeed, 0);
-        if (_rigidbody.velocity.y > MaxFallSpeed)
+        else if (_rigidbody.velocity.y > MaxFallSpeed)
             _rigidbody.velocity = new Vector3(0, MaxFallSpeed, 0);
+
+        if (transform.position.x > 0)
+            transform.position += new Vector3(-1, 0, 0) * Time.deltaTime;
+        else if (transform.position.x < 0)
+            transform.position += new Vector3(1, 0, 0) * Time.deltaTime;
     }
 }
